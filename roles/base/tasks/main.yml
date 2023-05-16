@@ -1,4 +1,22 @@
 ---
+# Install Base Packages
+- name: Enable DNF Fastest Mirror
+  ansible.builtin.lineinfile:
+    path: /etc/dnf/dnf.conf
+    regexp: '^fastestmirror='
+    line: fastestmirror=1
+
+- name: Ensure deps are installed
+  ansible.builtin.package:
+    name:  
+      #- 'python3-firewall'
+      - 'kmod'
+      - 'systemd-udev'
+      - 'selinux-policy'
+      - 'python3-libselinux'
+    state: present
+
+
 # tasks file for base
 - name: Set SELinux to disabled state
   selinux:
