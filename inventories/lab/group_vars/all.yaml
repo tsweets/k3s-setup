@@ -31,11 +31,15 @@ k3s_token: "k3sToken1234567890"
 # it for each of your hosts, though.
 k3s_node_ip: '{{ ansible_facts[flannel_iface]["ipv4"]["address"] }}'
 
+# Disable the taint manually by setting: k3s_master_taint = false
+k3s_master_taint: "{{ true if groups['worker'] | default([]) | length >= 1 else false }}"
+
+
 # these arguments are recommended for servers as well as agents:
 extra_args: >-
   --flannel-iface={{ flannel_iface }}
   --node-ip={{ k3s_node_ip }}
-  
+
 # change these to your liking, the only required are: --disable servicelb, --tls-san {{ apiserver_endpoint }}
 extra_server_args: >-
   {{ extra_args }}
@@ -43,5 +47,6 @@ extra_server_args: >-
   --tls-san {{ apiserver_endpoint }}
   --disable servicelb
   --disable traefik
+
 extra_agent_args: >-
   {{ extra_args }}

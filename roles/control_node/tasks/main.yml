@@ -36,6 +36,9 @@
 - name: Deploy metallb manifest
   include_tasks: metallb.yml
 
+- name: Extra Server Args
+  ansible.builtin.debug:
+    msg: Extra Server Args = {{ extra_server_args }}
 - name: System Init Args
   ansible.builtin.debug:
     msg: Groups = {{ groups['control'] }} HostVars = https://{{ hostvars[groups['control'][0]].k3s_node_ip | split(",") | first | ansible.utils.ipwrap }}:6443 System Init Args = {{ server_init_args }}
