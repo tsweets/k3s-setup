@@ -6,7 +6,6 @@ driver:
   name: docker
 platforms:
   - name: instance
-  #  image: quay.io/centos/centos:stream8
     image: "geerlingguy/docker-rockylinux9-ansible:latest"
     command: ${MOLECULE_DOCKER_COMMAND:-""}
     volumes:

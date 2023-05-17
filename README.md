@@ -21,7 +21,7 @@ Note: Since this is a test lab, I don't really care about any password leaks, as
 ### Anisble Lab  
 Here's a list of VMs I have created
 ```
-10.107.0.110 
+10.107.0.110 API VIP
 10.107.0.111 k3s-control-01 k3s-control-01.cloud.skyline.lan
 10.107.0.112 k3s-control-02 k3s-control-02.cloud.skyline.lan
 10.107.0.113 k3s-control-01k3s-control-03.cloud.skyline.lan
