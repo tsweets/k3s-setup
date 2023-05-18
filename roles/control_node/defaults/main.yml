@@ -1,5 +1,7 @@
 ---
 # defaults file for control_node
+kube_vip_iface: null
+
 server_init_args: >-
   {% if groups['control'] | length > 1 %}
     {% if ansible_hostname == hostvars[groups['control'][0]]['ansible_hostname'] %}

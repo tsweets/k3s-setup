@@ -10,17 +10,21 @@ flannel_iface: "eth0"
 
 # image tag for kube-vip
 kube_vip_tag_version: "v0.5.12"
-kube_vip_iface: eth1
+
 # apiserver_endpoint is virtual ip-address which will be configured on each master
-apiserver_endpoint: "192.168.30.222"
+apiserver_endpoint: "10.107.0.110"
 
 # image tag for metal lb
 #metal_lb_frr_tag_version: "v7.5.1"
 metal_lb_speaker_tag_version: "v0.13.9"
 metal_lb_controller_tag_version: "v0.13.9"
 
+# metallb mode layer2 or bgp
+metal_lb_mode: "layer2"
+
 # metallb type frr or native
 metal_lb_type: "native"
+metal_lb_ip_range: "10.107.0.130-10.107.0.139"
 
 # k3s_token is required  masters can talk together securely
 # this token should be alpha numeric only
