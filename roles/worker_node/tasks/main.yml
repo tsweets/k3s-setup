@@ -1,0 +1,20 @@
+---
+# tasks file for worker_node
+- name: Copy K3s service file
+  template:
+    src: "k3s.service.j2"
+    dest: "{{ systemd_dir }}/k3s-node.service"
+    owner: root
+    group: root
+    mode: 0755
+
+- name: Start Args
+  ansible.builtin.debug:
+    msg: API Server Endpoint = {{ apiserver_endpoint }} Extra Server Args = {{ extra_server_args }}  ExecStart=/usr/local/bin/k3s agent --server https://{{ apiserver_endpoint | ansible.utils.ipwrap }}:6443 --token {{ hostvars[groups['control'][0]]['token'] | default(k3s_token) }} {{ extra_agent_args | default("") }}
+
+- name: Enable and check K3s service
+  systemd:
+    name: k3s-node
+    daemon_reload: yes
+    state: restarted
+    enabled: yes

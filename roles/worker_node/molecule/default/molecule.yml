@@ -1,0 +1,50 @@
+---
+dependency:
+  name: galaxy
+driver:
+  name: vagrant
+platforms:
+  - name: k3s-node-01
+    box: rockylinux/9
+    memory: 2048
+    cpus: 2
+    interfaces:
+      # `network_name` is the required identifier, other keys map to arguments.
+      - auto_config: true
+        network_name: private_network
+        type: static
+        ip: 192.168.56.121
+        #guest: 80
+        #host: 8080
+    # List of raw Vagrant `config` options.
+    #provider_raw_config_args:
+    #  - "customize ['modifyvm', :id, '--natdnshostresolver1', 'on']"
+    # Dictionary of `config` options.
+    config_options:
+      ssh.keep_alive: yes
+      ssh.remote_user: root
+    groups: 
+      - control 
+  - name: k3s-node-02
+    box: rockylinux/9
+    memory: 2048
+    cpus: 2
+    interfaces:
+      - auto_config: true
+        network_name: private_network
+        type: static
+        ip: 192.168.56.122
+    config_options:
+      ssh.keep_alive: yes
+      ssh.remote_user: root
+    groups: 
+      - control 
+
+provisioner:
+  name: ansible
+  inventory:
+    links:
+      group_vars: ../../../../inventories/lab/group_vars/ 
+  
+verifier:
+  name: ansible
