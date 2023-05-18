@@ -42,7 +42,7 @@ molecule init role beer30.k3s -d docker
 
 ##### Collections Installed
 ansible-galaxy collection install ansible.posix
-
+ansible-galaxy collection install ansible.utils
 
 
 
